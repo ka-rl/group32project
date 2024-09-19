@@ -10,7 +10,10 @@ import {
   Switch,
   useColorMode,
   useColorModeValue,
+  Text
 } from '@chakra-ui/react';
+import { Link as ChakraLink } from "@chakra-ui/react";
+import { Link as RouterLink } from "react-router-dom";
 
 const Login = () => {
   const { toggleColorMode } = useColorMode();
@@ -38,9 +41,12 @@ const Login = () => {
           background="white"
           mb={6}
         />
-        <Button colorScheme="teal" mb={8}>
+        <Button colorScheme="teal" mb={3}>
           Log In
         </Button>
+        <Text>
+            or <ChakraLink as={RouterLink} to="/register" color="blue">Create an Account</ChakraLink>
+        </Text>
       </Flex>
     </Flex>
   );
