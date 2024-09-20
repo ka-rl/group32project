@@ -1,21 +1,13 @@
 import React from 'react';
 import { ChakraProvider, Box, Flex, Heading, Button, Text, Image } from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
+import Navbar from '../components/Navbar';
 
 function LandingPage() {
   return (
     <ChakraProvider>
       <Box bg="gray.100" minH="100vh">
-        <Flex
-          as="header"
-          bg="teal.500"
-          color="white"
-          padding="4"
-          justify="space-between"
-        >
-          <Heading as="h1" size="lg">Non-Profit Organization</Heading>
-          <Button colorScheme="teal" variant="outline">Donate Now</Button>
-          <Button colorScheme="teal" variant="outline">Login</Button>
-        </Flex>
+        <Navbar />
 
         <Flex
           direction="column"
@@ -31,7 +23,7 @@ function LandingPage() {
             Our mission is to support underserved communities with education, healthcare, and
             sustainable development projects.
           </Text>
-          <Button colorScheme="teal" size="lg" mb="4">
+          <Button as={Link} to="/register" colorScheme="teal" size="lg" mb="4">
             Join Us
           </Button>
           <Image
