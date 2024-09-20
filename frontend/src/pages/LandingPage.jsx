@@ -1,16 +1,9 @@
-import React, { useState } from "react";
-
+import React from 'react'
 
 const LandingPage = () => {
-    return (
-        <>
-            <nav></nav>
-            <main>
-                <div>
-                    <p>Hello World!</p>
-                </div>
-            </main>
-        </>
-    );
-};
-export default LandingPage;
+  return (
+    <div>LandingPage</div>
+  )
+}
+
+export default LandingPage
