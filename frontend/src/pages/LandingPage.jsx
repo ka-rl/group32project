@@ -7,7 +7,7 @@ function LandingPage() {
   return (
     <ChakraProvider>
       <Box bg="gray.100" minH="100vh">
-        <Navbar />
+        {/* <Navbar /> */}
 
         <Flex
           direction="column"
