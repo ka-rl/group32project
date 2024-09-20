@@ -5,7 +5,6 @@ import Login from "./pages/Login"
 import Register from "./pages/Register"
 import Profile from "./pages/Profile"
 import Event from "./pages/Event"
-
 import Navbar from "./components/Navbar"
 
 function App() {
