@@ -49,7 +49,7 @@ const Event = () => {
           <FormLabel>Event Name</FormLabel>
           <Input
               
-              placeholder="Event Name"
+              placeholder="Enter event name..."
               type="text"
               variant="filled"
               background="white"
@@ -59,7 +59,7 @@ const Event = () => {
       <FormControl isRequired mb={3}>
         <FormLabel>Event Description</FormLabel>
         <Textarea
-          placeholder="Event Description"
+          placeholder="Enter event description..."
           variant="filled"
           background="white"
         />
@@ -68,7 +68,7 @@ const Event = () => {
         <FormControl isRequired mb={3}>
           <FormLabel>Event Location</FormLabel>
           <Textarea
-            placeholder="Event Location"
+            placeholder="Enter event location..."
             variant="filled"
             background="white"
           />
