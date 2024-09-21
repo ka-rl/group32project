@@ -42,7 +42,7 @@ const Register = () => {
           mb={6}
         />
         <Button colorScheme="teal" mb={3}>
-          Create Account
+          <ChakraLink as={RouterLink} to="/profile">Create Account</ChakraLink>
         </Button>
         <Text>
             or <ChakraLink as={RouterLink} to="/login" color="blue">Log In</ChakraLink>
