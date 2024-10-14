@@ -1,11 +1,17 @@
 const express = require('express')
+//controller functions
+const { registerUser, loginUser } = require('../controllers/userController')
+
+
+
 
 const router = express.Router()
 
 //login route
-router.post('/login', () => {})
+//will execute loginUser when a post request sent to /login
+router.post('/login', loginUser)
 
-//signup route
-router.post('/signup', () => {})
+//register route
+router.post('/register', registerUser)
 
 module.exports = router
