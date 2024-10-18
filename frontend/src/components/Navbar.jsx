@@ -16,9 +16,11 @@ const Navbar = () => {
     >
       {/* Branding */}
       <Heading as="h1" size="lg">
-        Non-Profit Org
+        <a href='/'>
+          Non-Profit Org
+        </a> 
       </Heading>
-
+      
       {/* Navigation Links */}
       <Flex gap="6" align="center">
         <Link href="/login" fontSize="lg" _hover={{ color: 'teal.300' }}>
