@@ -15,6 +15,7 @@ const defaultOptions = [
 const MultiSelect = () => (
   <Select
     isMulti
+    placeholder="Skills"
     options={defaultOptions}
   />
 );

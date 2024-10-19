@@ -12,13 +12,29 @@ const userSchema = new Schema ({
     password: {
         type: String,
         required: true
-    }
+    },
+    location: {
+        type: String,
+        required: true
+    },
+    skills: {
+        type: [String],
+        required: true
+    },
+    preference: {
+        type: String,
+        required: true
+    },
+    availability: {
+        type: String,
+        required: true
+    },
 })
 
-userSchema.statics.register = async function(email, password) {
+userSchema.statics.register = async function(email, password, location, preference, availability, skills) {
 
     //validation
-    if (!email || !password){
+    if (!email || !password || !location || ! preference ||!availability || !skills){
         throw Error('All fields must be filled')
     }
     if (!validator.isEmail(email)){
@@ -33,7 +49,7 @@ userSchema.statics.register = async function(email, password) {
         throw Error('Email already in use')
     }
 
-    const user = await this.create({ email, password })
+    const user = await this.create({ email, password, location, preference, availability, skills})
 
     return user
 }
