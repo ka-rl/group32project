@@ -24,6 +24,9 @@ const Navbar = () => {
         <Link href="/login" fontSize="lg" _hover={{ color: 'teal.300' }}>
           Login
         </Link>
+        <Link href="/event" fontSize="lg" _hover={{ color: 'teal.300' }}>
+          Host an Event
+        </Link>
         <Button colorScheme="teal" variant="outline" size="md">
           Donate Now
         </Button>
