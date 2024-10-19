@@ -16,7 +16,9 @@ const Navbar = () => {
     >
       {/* Branding */}
       <Heading as="h1" size="lg">
-        Non-Profit Org
+        <a href='/'>
+          Non-Profit Org
+        </a> 
       </Heading>
 
       {/* Navigation Links */}
