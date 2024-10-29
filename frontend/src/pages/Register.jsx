@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { useState } from 'react'
+import { useRegister } from '../hooks/useRegister'
 import {
   Flex,
   Heading,
@@ -22,10 +23,13 @@ const Register = () => {
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const {register, error, isLoading} = useRegister();
   
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log(email,password)
+
+    await register(email, password)
+
   }
 
   return (
@@ -55,9 +59,10 @@ const Register = () => {
             onChange={(e) => setPassword(e.target.value)}
             value={password}
           />
-          <Button colorScheme="teal" mb={3} type='submit'>
+          <Button colorScheme="teal" mb={3} type='submit' disabled={isLoading}>
             Create Account
           </Button>
+          {error && <div className="error">{error}</div>}
         </form>
         <Text>
             or <ChakraLink as={RouterLink} to="/login" color="blue">Log In</ChakraLink>
