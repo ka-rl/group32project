@@ -30,7 +30,7 @@ const loginUser = async (req, res) => {
 const registerUser = async (req, res) => {
 
 
-    const {email, passwrod} = req.body
+    const {email, password} = req.body
 
     try {
         const user = await User.register(email, password)

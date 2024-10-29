@@ -5,6 +5,7 @@ const { registerUser, loginUser } = require('../controllers/userController')
 
 
 
+
 const router = express.Router()
 
 //login route
@@ -13,5 +14,9 @@ router.post('/login', loginUser)
 
 //register route
 router.post('/register', registerUser)
+
+router.get('/', (req, res) => {
+    res.json({mssg: 'hello'})
+})
 
 module.exports = router
