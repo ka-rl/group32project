@@ -1,6 +1,8 @@
 {
   "dependencies": {
     "chakra-multiselect": "^0.4.13",
-    "react-router-dom": "^6.26.2"
+    "mongodb": "^6.10.0",
+    "react-router-dom": "^6.26.2",
+    "validator": "^13.12.0"
   }
 }
