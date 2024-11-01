@@ -1,7 +1,16 @@
 import React from 'react';
 import { Flex, Box, Heading, Link, Button, textDecoration } from '@chakra-ui/react';
+import { useLogout } from '../hooks/useLogout'
+import { useAuthContext } from '../hooks/useAuthContext';
 
 const Navbar = () => {
+  const { logout } = useLogout();
+  const { user } = useAuthContext()
+
+  const handleClick = () => {
+    logout()
+  }
+
   return (
     <Flex
       as="nav"
@@ -20,13 +29,26 @@ const Navbar = () => {
       </Heading>
 
       {/* Navigation Links */}
-      <Flex gap="6" align="center">
-        <Link href="/login" fontSize="lg" _hover={{ color: 'teal.300' }}>
-          Login
-        </Link>
-        <Link href="/event" fontSize="lg" _hover={{ color: 'teal.300' }}>
-          Host an Event
-        </Link>
+      <Flex gap="4" align="center">
+        {!user && (
+           <div>
+           <Button as="a" href="/login" fontSize="lg" bg='teal.500' color='white' _hover={{ color: 'teal.300' }}>
+             Login
+           </Button>
+         </div>
+        )}
+        {user && (
+          <div>
+            <span>{user.email}</span>
+            <Button onClick={handleClick} fontSize="lg" bg='teal.500' color='white' _hover={{ color: 'teal.300' }}>
+              Logout
+            </Button>
+          </div>
+        )}
+        <Button as="a" href="/event" fontSize="lg" bg='teal.500' color='white' _hover={{ color: 'teal.300' }}>
+            Host an Event
+        </Button>
+
         <Button colorScheme="teal" variant="outline" size="md">
           Donate Now
         </Button>

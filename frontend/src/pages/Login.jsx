@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { useState } from 'react';
+import { useLogin } from '../hooks/useLogin';
 import {
   Flex,
   Heading,
@@ -22,10 +23,11 @@ const Login = () => {
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const {login, error, isLoading} = useLogin();
   
   const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log(email,password)
+    await login(email, password)
   }
 
   return (
@@ -55,9 +57,10 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
             value={password}
           />
-          <Button colorScheme="teal" mb={3} type="submit">
+          <Button colorScheme="teal" mb={3} type="submit" disabled={isLoading}>
             Log In
           </Button>
+          {error && <div className="error">{error}</div>}
         </form>
         <Text>
             or <ChakraLink as={RouterLink} to="/register" color="blue">Create an Account</ChakraLink>
