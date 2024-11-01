@@ -1,5 +1,5 @@
 import React from 'react';
-import { Flex, Box, Heading, Link, Button } from '@chakra-ui/react';
+import { Flex, Box, Heading, Link, Button, textDecoration } from '@chakra-ui/react';
 
 const Navbar = () => {
   return (
@@ -16,7 +16,7 @@ const Navbar = () => {
     >
       {/* Branding */}
       <Heading as="h1" size="lg">
-        Non-Profit Org
+        <Link href='/' _hover={ {textDecoration: 'None'}}>Non-Profit Org</Link>
       </Heading>
 
       {/* Navigation Links */}
