@@ -15,18 +15,50 @@ import {
   Text,
   Textarea,
   Select,
-  ChakraProvider,
-  extendTheme,
-  Box
 } from '@chakra-ui/react';
-import { Link as ChakraLink } from "@chakra-ui/react";
-import { Link as RouterLink } from "react-router-dom";
 
 const Event = () => {
   const { toggleColorMode } = useColorMode();
   const formBackground = useColorModeValue('gray.100', 'gray.700');
+
+  // State for each input field
+  const [eventName, setEventName] = useState("");
+  const [eventDescription, setEventDescription] = useState("");
+  const [eventLocation, setEventLocation] = useState("");
+  const [urgency, setUrgency] = useState("");
   const [selectedDate, setSelectedDate] = useState(null);
-  const [selectedSkills, setSelectedSkills] = useState([]); // State to manage selected values
+  const [selectedSkills, setSelectedSkills] = useState([]);
+
+  // Save event data to backend
+  const handleSave = async () => {
+    const eventData = {
+      name: eventName,
+      description: eventDescription,
+      location: eventLocation,
+      skills: selectedSkills,
+      urgency: urgency,
+      date: selectedDate,
+    };
+
+    try {
+      const response = await fetch("http://localhost:3000/api/event/event", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(eventData),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        alert("Event saved successfully!");
+      } else {
+        alert(data.error || "Failed to save event.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("An error occurred while saving the event.");
+    }
+  };
 
   return (
     <Flex h="100vh" alignItems="center" justifyContent="center">
@@ -34,33 +66,39 @@ const Event = () => {
         flexDirection="column"
         bg={formBackground}
         p={12}
+        rounded={6}
       >
         <Heading mb={6}>Event Management</Heading>
 
         <FormControl isRequired mb={3}>
           <FormLabel>Event Name</FormLabel>
           <Input
-              
-              placeholder="Enter event name..."
-              type="text"
-              variant="filled"
-              background="white"
+            placeholder="Enter event name..."
+            type="text"
+            value={eventName}
+            onChange={(e) => setEventName(e.target.value)}
+            variant="filled"
+            background="white"
           />
         </FormControl>
 
-      <FormControl isRequired mb={3}>
-        <FormLabel>Event Description</FormLabel>
-        <Textarea
-          placeholder="Enter event description..."
-          variant="filled"
-          background="white"
-        />
+        <FormControl isRequired mb={3}>
+          <FormLabel>Event Description</FormLabel>
+          <Textarea
+            placeholder="Enter event description..."
+            value={eventDescription}
+            onChange={(e) => setEventDescription(e.target.value)}
+            variant="filled"
+            background="white"
+          />
         </FormControl>
 
         <FormControl isRequired mb={3}>
           <FormLabel>Event Location</FormLabel>
           <Textarea
             placeholder="Enter event location..."
+            value={eventLocation}
+            onChange={(e) => setEventLocation(e.target.value)}
             variant="filled"
             background="white"
           />
@@ -68,35 +106,43 @@ const Event = () => {
          
         <FormControl isRequired mb={4}>
           <FormLabel>Skills</FormLabel>
-          <MultiSelect/>
+          <MultiSelect
+            selectedSkills={selectedSkills}
+            setSelectedSkills={setSelectedSkills}
+          />
         </FormControl>
 
         <FormControl>
           <FormLabel>Event Urgency</FormLabel>
-          <Select bg="white" placeholder='Select Urgency' mb={3}>
-          <option value='low'>Low</option>
-          <option value='medium'>Medium</option>
-          <option value='high'>High</option>
+          <Select
+            bg="white"
+            placeholder="Select Urgency"
+            value={urgency}
+            onChange={(e) => setUrgency(e.target.value)}
+            mb={3}
+          >
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
           </Select>
         </FormControl>
 
-      <FormControl mb={3}>
-        <FormLabel>Event Date</FormLabel>
-        <DatePicker
-          selected={selectedDate}
-          onChange={(date) => setSelectedDate(date)}
-          dateFormat="MM/dd/yyyy"
-          placeholderText="Select Date"
+        <FormControl mb={3}>
+          <FormLabel>Event Date</FormLabel>
+          <DatePicker
+            selected={selectedDate}
+            onChange={(date) => setSelectedDate(date)}
+            dateFormat="MM/dd/yyyy"
+            placeholderText="Select Date"
           />
         </FormControl>
 
-         <Button colorScheme="teal" mb={6}>
+        <Button colorScheme="teal" mb={6} onClick={handleSave}>
           Save
         </Button>
-
       </Flex>
     </Flex>
   );
 };
- 
+
 export default Event;
