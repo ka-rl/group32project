@@ -22,7 +22,10 @@ const Navbar = () => {
       {/* Navigation Links */}
       <Flex gap="6" align="center">
         <Link href="/login" fontSize="lg" _hover={{ color: 'teal.300' }}>
-          Login
+          Volunteer Login
+        </Link>
+        <Link href="/admin/login" fontSize="lg" _hover={{ color: 'teal.300'}}>
+          Admin Login
         </Link>
         <Link href="/event" fontSize="lg" _hover={{ color: 'teal.300' }}>
           Host an Event
