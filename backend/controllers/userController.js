@@ -30,10 +30,10 @@ const loginUser = async (req, res) => {
 const registerUser = async (req, res) => {
 
 
-    const {email, password} = req.body
+    const {email, password, location, preference, availability, skills} = req.body
 
     try {
-        const user = await User.register(email, password)
+        const user = await User.register(email, password, location, preference, availability, skills)
 
         //create token
         const token = createToken(user._id)
@@ -41,6 +41,7 @@ const registerUser = async (req, res) => {
         res.status(200).json({email, token})
     } catch (error) {
         res.status(400).json({error: error.message})
+        console.log(error.message)
     }
 }
 

@@ -17,10 +17,7 @@ const userSchema = new Schema ({
         type: String,
         required: true
     },
-    skills: {
-        type: [String],
-        required: true
-    },
+    
     preference: {
         type: String,
         required: true
@@ -28,6 +25,14 @@ const userSchema = new Schema ({
     availability: {
         type: String,
         required: true
+    },
+    skills: {
+        type: String,
+        required: false
+    },
+    isAdmin: {
+        type: Boolean,
+        required: false
     },
 })
 
@@ -40,9 +45,9 @@ userSchema.statics.register = async function(email, password, location, preferen
     if (!validator.isEmail(email)){
         throw Error('Email is invalid')
     }
-    if (!validator.isStrongPassword(password)){
-        throw Error('Password not strong enough')
-    }
+    // if (!validator.isStrongPassword(password)){
+    //     throw Error('Password not strong enough')
+    // }
     
     const exists = await this.findOne({ email })
     if (exists) {

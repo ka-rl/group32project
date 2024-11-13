@@ -40,6 +40,7 @@ const Navbar = () => {
         {user && (
           <div>
             <span>{user.email}</span>
+            {user.isAdmin ? (<span>admin</span>):(<span>volunteer</span>)}
             <Button onClick={handleClick} fontSize="lg" bg='teal.500' color='white' _hover={{ color: 'teal.300' }}>
               Logout
             </Button>
