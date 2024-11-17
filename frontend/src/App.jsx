@@ -7,6 +7,7 @@ import Profile from "./pages/Profile"
 import Event from "./pages/Event"
 import Navbar from "./components/Navbar"
 import AdminLogin from "./pages/admin/AdminLogin"
+import AdminDashboard from "./pages/admin/AdminDashboard"
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/event" element={<Event />}/>
 
         <Route path="/admin/login" element={<AdminLogin />}/>
+        <Route path="/admin/AdminDashboard" element={<AdminDashboard />}/>
       </Routes>
     </>
   )
