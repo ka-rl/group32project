@@ -22,13 +22,15 @@ const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [location, setLocation] = useState('');
+  const skills = 'none';
   const [preferences, setPreferences] = useState('');
   const [availability, setAvailability] = useState('')
-  const [error, setError] = useState(null);
   // Fix: Adding `e` as a parameter to handleSubmit
+  const {register, error, isLoading} = useRegister();
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevents the default form submission behavior
-    console.log(email, password, location, preferences);
+    console.log(email, password, location, preferences, availability, skills);
+    await register(email, password, location, preferences, availability, skills);
   };
 
   return (
@@ -89,9 +91,9 @@ const Register = () => {
             onChange={(e) => setAvailability(e.target.value)}
             value={availability}
           >
-            <option value="pref1">1</option>
-            <option value="pref2">2</option>
-            <option value="pref3">3</option>
+            <option value="availability1">1</option>
+            <option value="availability2">2</option>
+            <option value="availability3">3</option>
           </Select>
           <Button colorScheme="teal" mt={1} mb={3} type="submit">
             Create Account
