@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import MultiSelect from '../components/SkillSelect';
+import { useAuthContext } from '../hooks/useAuthContext';
+import { useNavigate } from 'react-router-dom';
 import {
   Flex,
   Heading,
@@ -27,6 +29,12 @@ const Event = () => {
   const formBackground = useColorModeValue('gray.100', 'gray.700');
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedSkills, setSelectedSkills] = useState([]); // State to manage selected values
+  const { user } = useAuthContext()
+  const navigate = useNavigate()
+
+  if (!user){
+    navigate('/login')
+  }
 
   return (
     <Flex h="100vh" alignItems="center" justifyContent="center">
