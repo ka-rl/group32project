@@ -30,11 +30,7 @@ const Event = () => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedSkills, setSelectedSkills] = useState([]); // State to manage selected values
   const { user } = useAuthContext()
-  const navigate = useNavigate()
 
-  if (!user){
-    navigate('/login')
-  }
 
   return (
     <Flex h="100vh" alignItems="center" justifyContent="center">

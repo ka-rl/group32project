@@ -22,7 +22,7 @@ const loginUser = async (req, res) => {
     }
 
     //res is the response object
-    res.json({mssg: 'userlogin'})
+    //res.json({mssg: 'userlogin'})
 }
 
 
