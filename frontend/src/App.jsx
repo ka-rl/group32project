@@ -8,6 +8,9 @@ import Event from "./pages/Event"
 import Navbar from "./components/Navbar"
 import AdminLogin from "./pages/admin/AdminLogin"
 import AdminDashboard from "./pages/admin/AdminDashboard"
+import EventHistory from "./pages/admin/EventHistory";
+import ManageEvent from "./pages/admin/ManageEvent";
+import VolunteerData from "./pages/admin/VolunteerData";
 
 function App() {
   return (
@@ -22,6 +25,9 @@ function App() {
 
         <Route path="/admin/login" element={<AdminLogin />}/>
         <Route path="/admin/AdminDashboard" element={<AdminDashboard />}/>
+        <Route path="/admin/event-history" element={<EventHistory />} />
+        <Route path="/admin/manage-event" element={<ManageEvent />} />
+        <Route path="/admin/volunteer-data" element={<VolunteerData />} />
       </Routes>
     </>
   )

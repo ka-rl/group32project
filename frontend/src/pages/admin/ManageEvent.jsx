@@ -1,17 +1,16 @@
 import React from 'react';
-import { ChakraProvider, Box, Flex, Heading, Button, Text, VStack } from '@chakra-ui/react';
-import { Link } from 'react-router-dom';
+import { ChakraProvider, Box, Flex, Heading, Text } from '@chakra-ui/react';
 import AdminSidebar from '../../components/AdminSidebar';
 
-function AdminDashboard() {
+function ManageEvent() {
   return (
     <ChakraProvider>
       <Box bg="gray.100" minH="100vh">
-        {/* Sidebar */}
         <Flex>
+          {/* Sidebar */}
           <AdminSidebar />
-
-          {/* Main Page */}
+          
+          {/* Main Content */}
           <Box ml="250px" flex="1" p="8">
             <Flex
               direction="column"
@@ -20,18 +19,17 @@ function AdminDashboard() {
               minH="70vh"
             >
               <Heading as="h2" size="2xl" textAlign="center" mb="4">
-                Admin Dashboard
+                Manage Events
               </Heading>
+              <Text fontSize="lg" color="gray.600">
+                This is the Manage Events page. Start adding your content here.
+              </Text>
             </Flex>
           </Box>
         </Flex>
-
-        <Box as="footer" bg="teal.500" color="white" padding="4" textAlign="center">
-          <Text>&copy; 2024 Non-Profit Organization. All rights reserved.</Text>
-        </Box>
       </Box>
     </ChakraProvider>
   );
 }
 
-export default AdminDashboard;
+export default ManageEvent;
