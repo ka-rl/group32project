@@ -7,8 +7,7 @@ const { createEvent } = require('../controllers/eventController')
 
 const router = express.Router()
 
-//login route
-//will execute loginUser when a post request sent to /login
-router.post('/event', createEvent)
+
+router.post('/create', createEvent)
 
 module.exports = router
