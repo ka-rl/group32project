@@ -15,10 +15,8 @@ import {
   Td,
   HStack,
   Select,
-  useToast,
 } from '@chakra-ui/react';
 import AdminSidebar from '../../components/AdminSidebar';
-import ReactToPrint from 'react-to-print';
 
 const initialEvents = [
   { id: 1, name: 'Event One', date: '2024-12-01', location: 'Location One', skills: 'Communication' },
@@ -33,7 +31,6 @@ function EventHistory() {
   const [search, setSearch] = useState('');
   const [filterSkills, setFilterSkills] = useState('');
   const [sortBy, setSortBy] = useState('');
-  const toast = useToast();
 
   // Filter and Sort events
   const filterAndSortEvents = () => {
@@ -76,9 +73,6 @@ function EventHistory() {
     setSortBy(e.target.value);
     filterAndSortEvents();
   };
-
-  // PDF Print functionality (using react-to-print)
-  const componentRef = React.useRef();
 
   return (
     <ChakraProvider>
@@ -126,7 +120,7 @@ function EventHistory() {
 
                 {/* Event Table */}
                 {filteredEvents.length > 0 ? (
-                  <Table variant="striped" colorScheme="teal" maxW="800px" ref={componentRef}>
+                  <Table variant="striped" colorScheme="teal" maxW="800px">
                     <Thead>
                       <Tr>
                         <Th>Event Name</Th>
@@ -149,14 +143,6 @@ function EventHistory() {
                 ) : (
                   <Text>No events found matching your criteria.</Text>
                 )}
-
-                {/* Print Button */}
-                <HStack mt="6">
-                  <ReactToPrint
-                    trigger={() => <Button colorScheme="teal">Print as PDF</Button>}
-                    content={() => componentRef.current}
-                  />
-                </HStack>
               </Flex>
             </Box>
           </Flex>
