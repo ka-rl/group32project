@@ -1,4 +1,4 @@
-const History = require('../models/userModel')
+const History = require('../models/historyModel')
 const jwt = require('jsonwebtoken')
 
 
@@ -14,7 +14,7 @@ const searchVolunteerHistory = async (req, res) => {
         const eventHistory = await History.searchVolunteerHistory(email)
 
         //create token
-        const token = createToken(user._id)
+        const token = createToken(history._id)
 
         res.status(200).json({eventHistory})
     } catch (error) {

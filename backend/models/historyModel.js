@@ -1,29 +1,33 @@
-const mongoose = require('mongoose')
-const validator = require('validator')
+const mongoose = require('mongoose');
+const validator = require('validator');
 
-const Schema = mongoose.Schema
-//wont let us save to DB unless these rules are followed
-const histSchema = new Schema ({
-    events: {
+const Schema = mongoose.Schema;
+
+// Schema for volunteer history
+const histSchema = new Schema({
+    email: {
+        type: String,
+        required: true,
+        validate: [validator.isEmail, 'Invalid email format'],
+    },
+    eventsAttended: {
         type: [String],
         required: true,
     },
-    dates: {
-        type: [String],
-        required: true,
-    },
-    numEvents: {
-        type: int,
-        required: true,
+});
+
+// Static method to search volunteer history by email
+histSchema.statics.searchVolunteerHistory = async function (email) {
+    if (!email) {
+        throw new Error('Email must be provided');
     }
 
-})
+    const history = await this.findOne({ email });
+    if (!history) {
+        throw new Error('No history found for this email');
+    }
 
-histSchema.statics.host = async function(events, dates, numEvents) {
+    return history.eventsAttended; // Return the list of events attended
+};
 
-    const hist = await this.create({ events, dates, numEvents })
-
-    return hist
-}
-
-module.exports = mongoose.model('Notification', notifSchema)
+module.exports = mongoose.model('History', histSchema);

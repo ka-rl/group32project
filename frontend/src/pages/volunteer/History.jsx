@@ -20,33 +20,35 @@ const History = () => {
   const searchVolunteerHistory = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-
+  
     if (!email) {
       setError('Please enter a valid email.');
       setIsLoading(false);
       return;
     }
-
+  
     setError('');
     try {
-      const response = await fetch('/api/users/history', {
+      const response = await fetch('/api/history', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ email }),
       });
-
+  
       const data = await response.json();
+  
       if (response.ok) {
-        setEventHistory(data.eventHistory || []);
+        setEventHistory(data.eventsAttended || []); // Use correct field from backend response
       } else {
-        setError(data.error);
+        setError(data.error || 'Failed to fetch event history');
       }
     } catch (err) {
+      console.error('Fetch error:', err); // Log the error for debugging
       setError('Something went wrong. Please try again.');
     }
-
+  
     setIsLoading(false);
   };
 
