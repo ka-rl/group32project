@@ -17,7 +17,6 @@ const userSchema = new Schema ({
         type: String,
         required: true
     },
-    
     preference: {
         type: String,
         required: true
@@ -28,6 +27,10 @@ const userSchema = new Schema ({
     },
     skills: {
         type: String,
+        required: false
+    },
+    eventHistory: {
+        type: Array,
         required: false
     },
     isAdmin: {
@@ -77,6 +80,25 @@ userSchema.statics.login = async function(email, password) {
     }
 
     return user
+
+}
+
+userSchema.statics.searchVolunteerHistory = async function(email) {
+    
+    if (!email)
+    {
+        throw Error('All fields must be filled')
+    }
+
+    const user = await this.findOne({ email })
+    if (!user) {
+        throw Error('Invalid email')
+    }
+
+    const match = (email == user.email)
+    return user
+
+    //This is incomplete
 
 }
 
