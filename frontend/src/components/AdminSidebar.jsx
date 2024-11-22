@@ -21,36 +21,40 @@ const AdminSidebar = () => {
         </Heading>
         <Button
           as={Link}
-          to="/"
+          to="/admin/AdminDashboard"
           variant="ghost"
           colorScheme={location.pathname === '/admin/AdminDashboard' ? 'yellow' : 'whiteAlpha'}
+          _hover={{ bg: 'gold', color: 'black' }}
           w="full"
         >
           Dashboard
         </Button>
         <Button
           as={Link}
-          to="/manage-event"
+          to="/admin/manage-event"
           variant="ghost"
           colorScheme={location.pathname === '/admin/manage-event' ? 'yellow' : 'whiteAlpha'}
+          _hover={{ bg: 'gold', color: 'black' }}
           w="full"
         >
           Manage Event
         </Button>
         <Button
           as={Link}
-          to="/event-history"
+          to="/admin/event-history"
           variant="ghost"
           colorScheme={location.pathname === '/admin/event-history' ? 'yellow' : 'whiteAlpha'}
+          _hover={{ bg: 'gold', color: 'black' }}
           w="full"
         >
           Event History
         </Button>
         <Button
           as={Link}
-          to="/volunteer-data"
+          to="/admin/volunteer-data"
           variant="ghost"
           colorScheme={location.pathname === '/admin/volunteer-data' ? 'yellow' : 'whiteAlpha'}
+          _hover={{ bg: 'gold', color: 'black' }}
           w="full"
         >
           Volunteer Data Report

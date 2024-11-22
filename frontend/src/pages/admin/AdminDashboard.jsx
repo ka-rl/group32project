@@ -1,14 +1,14 @@
 import React from 'react';
-import { ChakraProvider, Box, Flex, Heading, Button, Text, VStack } from '@chakra-ui/react';
-import { Link } from 'react-router-dom';
+import { ChakraProvider, Box, Flex, Heading, Text } from '@chakra-ui/react';
 import AdminSidebar from '../../components/AdminSidebar';
 
 function AdminDashboard() {
   return (
     <ChakraProvider>
-      <Box bg="gray.100" minH="100vh">
-        {/* Sidebar */}
-        <Flex>
+      <Flex direction="column" minH="100vh" bg="gray.100">
+        {/* Sidebar and Main Content */}
+        <Flex flex="1">
+          {/* Sidebar */}
           <AdminSidebar />
 
           {/* Main Page */}
@@ -26,10 +26,11 @@ function AdminDashboard() {
           </Box>
         </Flex>
 
-        <Box as="footer" bg="teal.500" color="white" padding="4" textAlign="center">
+        {/* Footer */}
+        <Box as="footer" bg="teal.500" color="white" p="4" textAlign="center">
           <Text>&copy; 2024 Non-Profit Organization. All rights reserved.</Text>
         </Box>
-      </Box>
+      </Flex>
     </ChakraProvider>
   );
 }
