@@ -20,7 +20,6 @@ function App() {
         <Route path="/profile" element={<Profile />}/>
         <Route path="/event" element={<Event />}/>
         <Route path="/history" element={<History />}/>
-
         <Route path="/admin/login" element={<AdminLogin />}/>
       </Routes>
     </>

@@ -96,9 +96,7 @@ userSchema.statics.searchVolunteerHistory = async function(email) {
     }
 
     const match = (email == user.email)
-    return user
-
-    //This is incomplete
+    return user.eventHistory
 
 }
 
