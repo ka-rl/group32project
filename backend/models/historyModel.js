@@ -31,3 +31,6 @@ histSchema.statics.host = async function(userEmail, events, dates, numEvents) {
 }
 
 module.exports = mongoose.model('History', histSchema)
+
+//added missing comit message
+let g = false;
