@@ -1,4 +1,6 @@
+// History.jsx
 import React, { useState } from 'react';
+import { useSearchVolunteerHistory } from '../../hooks/useSearchVolunteerHistory'; // Import the custom hook
 import {
   Flex,
   Heading,
@@ -8,62 +10,24 @@ import {
   Box,
   Text,
 } from '@chakra-ui/react';
+import { Link as ChakraLink } from "@chakra-ui/react";
+import { Link as RouterLink } from "react-router-dom";
 
 const History = () => {
   const [email, setEmail] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
-  const [eventHistory, setEventHistory] = useState([]);
-
   const formBackground = useColorModeValue('gray.100', 'gray.700');
+  const { searchVolunteerHistory, eventHistory, error, isLoading } = useSearchVolunteerHistory();
 
-  const searchVolunteerHistory = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
-
-    if (!email) {
-        setError('Please enter a valid email.');
-        setIsLoading(false);
-        return;
-    }
-
-    setError('');
-    try {
-        const response = await fetch('/searchVolunteerHistory', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ email }),
-        });
-
-        const data = await response.json();
-
-        if (response.ok) {
-            setEventHistory(data.eventsAttended || []);
-        } else {
-            setError(data.error || 'Failed to fetch event history');
-        }
-    } catch (err) {
-        console.error('Fetch error:', err);
-        setError('Something went wrong. Please try again.');
-    }
-
-    setIsLoading(false);
-};
-
+    await searchVolunteerHistory(email); // Call the hook function to search history
+  };
 
   return (
     <Flex h="100vh" alignItems="center" justifyContent="center">
-      <Flex
-        flexDirection="column"
-        bg={formBackground}
-        p={12}
-        borderRadius={8}
-        boxShadow="lg"
-      >
+      <Flex flexDirection="column" bg={formBackground} p={12} borderRadius={8} boxShadow="lg">
         <Heading mb={6}>Volunteer History</Heading>
-        <form onSubmit={searchVolunteerHistory}>
+        <form onSubmit={handleSubmit}>
           <Input
             placeholder="E-mail"
             type="email"
