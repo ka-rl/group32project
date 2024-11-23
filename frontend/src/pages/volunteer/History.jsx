@@ -29,7 +29,7 @@ const History = () => {
   
     setError('');
     try {
-      const response = await fetch('/api/history', {
+      const response = await fetch('/searchVolunteerHistory', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -40,12 +40,12 @@ const History = () => {
       const data = await response.json();
   
       if (response.ok) {
-        setEventHistory(data.eventsAttended || []); // Use correct field from backend response
+        setEventHistory(data.eventsAttended || []);
       } else {
         setError(data.error || 'Failed to fetch event history');
       }
     } catch (err) {
-      console.error('Fetch error:', err); // Log the error for debugging
+      console.error('Fetch error:', err);
       setError('Something went wrong. Please try again.');
     }
   

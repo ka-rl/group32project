@@ -1,6 +1,6 @@
 import React from 'react';
-import { ChakraProvider, Box, Flex, Heading, Button, Text, Image } from '@chakra-ui/react';
-import { Link } from 'react-router-dom';
+import { ChakraProvider, Box, Flex, Heading, Button, Text, Image, Link as ChakraLink } from '@chakra-ui/react';
+import { Link as RouterLink } from 'react-router-dom';
 
 function Dash() {
   return (
@@ -26,7 +26,6 @@ function Dash() {
             direction="row"
             align="center"
             justify="center"
-            
           >
             {/* Left Section: Image and Email */}
             <Flex direction="column" align="center">
@@ -56,6 +55,11 @@ function Dash() {
                 Notifications
               </Heading>
               <Text>Find notifications as they appear here.</Text>
+              
+              {/* Link to Volunteer History */}
+              <ChakraLink as={RouterLink} to="/history" color="blue" mt="4" display="block">
+                See Volunteer History
+              </ChakraLink>
             </Box>
           </Flex>
         </Flex>

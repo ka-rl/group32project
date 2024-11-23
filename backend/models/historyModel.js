@@ -22,12 +22,13 @@ histSchema.statics.searchVolunteerHistory = async function (email) {
         throw new Error('Email must be provided');
     }
 
-    const history = await this.findOne({ email });
-    if (!history) {
+    // Find the document by email
+    const volunteerHistory = await this.findOne({ email });
+    if (!volunteerHistory) {
         throw new Error('No history found for this email');
     }
 
-    return history.eventsAttended; // Return the list of events attended
+    return volunteerHistory.eventsAttended;
 };
 
 module.exports = mongoose.model('History', histSchema);
