@@ -6,6 +6,7 @@ import Register from "./pages/volunteer/Register"
 import Profile from "./pages/Profile"
 import Event from "./pages/Event"
 import History from "./pages/volunteer/History"
+import Dash from "./pages/volunteer/Dash"
 import Navbar from "./components/Navbar"
 import AdminLogin from "./pages/admin/AdminLogin"
 
@@ -20,6 +21,7 @@ function App() {
         <Route path="/profile" element={<Profile />}/>
         <Route path="/event" element={<Event />}/>
         <Route path="/history" element={<History />}/>
+        <Route path="/dash" element={<Dash />}/>
         <Route path="/admin/login" element={<AdminLogin />}/>
       </Routes>
     </>
