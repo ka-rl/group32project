@@ -4,6 +4,10 @@ const validator = require('validator')
 const Schema = mongoose.Schema
 //wont let us save to DB unless these rules are followed
 const histSchema = new Schema ({
+    userEmail: {
+        type: [String],
+        required: true,
+    },
     events: {
         type: [String],
         required: true,
@@ -19,11 +23,14 @@ const histSchema = new Schema ({
 
 })
 
-histSchema.statics.host = async function(events, dates, numEvents) {
+histSchema.statics.host = async function(userEmail, events, dates, numEvents) {
 
-    const hist = await this.create({ events, dates, numEvents })
+    const hist = await this.create({ userEmail, events, dates, numEvents })
 
     return hist
 }
 
-module.exports = mongoose.model('Notification', notifSchema)
+module.exports = mongoose.model('History', histSchema)
+
+//added missing comit message
+let g = false;
