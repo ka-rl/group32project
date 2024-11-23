@@ -1,6 +1,5 @@
-import React from 'react';
-import { useState } from 'react'
-import { useRegister } from '../../hooks/useRegister'
+import React, { useState } from 'react';
+import { useRegister } from '../../hooks/useRegister';
 import {
   Flex,
   Heading,
@@ -22,15 +21,18 @@ const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [location, setLocation] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const skills = 'none';
   const [preferences, setPreferences] = useState('');
-  const [availability, setAvailability] = useState('')
-  // Fix: Adding `e` as a parameter to handleSubmit
-  const {register, error, isLoading} = useRegister();
+  const [availability, setAvailability] = useState('');
+  
+  const { register, error, isLoading } = useRegister();
+
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevents the default form submission behavior
-    console.log(email, password, location, preferences, availability, skills);
-    await register(email, password, location, preferences, availability, skills);
+    console.log(firstName, lastName, email, password, location, preferences, availability, skills);
+    await register(firstName, lastName, email, password, location, preferences, availability, skills);
   };
 
   return (
@@ -42,6 +44,24 @@ const Register = () => {
       >
         <Heading mb={6}>Register</Heading>
         <form onSubmit={handleSubmit}>
+          <Input
+            placeholder="First Name"
+            type="text"
+            variant="filled"
+            background="white"
+            mb={3}
+            onChange={(e) => setFirstName(e.target.value)}
+            value={firstName}
+          />
+          <Input
+            placeholder="Last Name"
+            type="text"
+            variant="filled"
+            background="white"
+            mb={3}
+            onChange={(e) => setLastName(e.target.value)}
+            value={lastName}
+          />
           <Input
             placeholder="E-mail"
             type="email"
@@ -81,7 +101,7 @@ const Register = () => {
             <option value="pref2">2</option>
             <option value="pref3">3</option>
           </Select>
-          <MultiSelect/>
+          <MultiSelect />
           <Select
             placeholder="Availability"
             variant="filled"
@@ -101,7 +121,7 @@ const Register = () => {
           {error && <div className="error">{error}</div>}
         </form>
         <Text>
-            or <ChakraLink as={RouterLink} to="/login" color="blue">Log In</ChakraLink>
+          or <ChakraLink as={RouterLink} to="/login" color="blue">Log In</ChakraLink>
         </Text>
       </Flex>
     </Flex>
