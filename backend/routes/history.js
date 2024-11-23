@@ -1,9 +1,7 @@
-const express = require('express')
-//controller functions
-const { searchVolunteerHistory } = require('../controllers/historyController')
+const express = require('express');
+const { searchVolunteerHistory } = require('../controllers/historyController');
+const router = express.Router();
 
-const router = express.Router()
+router.post('/searchVolunteerHistory', searchVolunteerHistory);
 
-router.post('/ThisCode', searchVolunteerHistory)
-
-module.exports = router
+module.exports = router;

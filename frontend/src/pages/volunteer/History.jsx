@@ -20,37 +20,38 @@ const History = () => {
   const searchVolunteerHistory = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-  
+
     if (!email) {
-      setError('Please enter a valid email.');
-      setIsLoading(false);
-      return;
+        setError('Please enter a valid email.');
+        setIsLoading(false);
+        return;
     }
-  
+
     setError('');
     try {
-      const response = await fetch('/searchVolunteerHistory', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email }),
-      });
-  
-      const data = await response.json();
-  
-      if (response.ok) {
-        setEventHistory(data.eventsAttended || []);
-      } else {
-        setError(data.error || 'Failed to fetch event history');
-      }
+        const response = await fetch('/searchVolunteerHistory', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            setEventHistory(data.eventsAttended || []);
+        } else {
+            setError(data.error || 'Failed to fetch event history');
+        }
     } catch (err) {
-      console.error('Fetch error:', err);
-      setError('Something went wrong. Please try again.');
+        console.error('Fetch error:', err);
+        setError('Something went wrong. Please try again.');
     }
-  
+
     setIsLoading(false);
-  };
+};
+
 
   return (
     <Flex h="100vh" alignItems="center" justifyContent="center">

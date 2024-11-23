@@ -1,26 +1,29 @@
-const History = require('../models/historyModel')
-const jwt = require('jsonwebtoken')
+const History = require('../models/historyModel');
+const jwt = require('jsonwebtoken');
 
-
-const createToken = (_id) => { //id apart of the token payload
-    jwt.sign({_id}, 'thisshouldbesecret') //sign the token
-
-}
+// Helper function to create token
+const createToken = (_id) => {
+    return jwt.sign({ _id }, 'thisshouldbesecret', { expiresIn: '1h' }); // **Returning the token**
+};
 
 const searchVolunteerHistory = async (req, res) => {
     const { email } = req.body;
 
     try {
-        const eventHistory = await History.searchVolunteerHistory(email)
+        // **Check if email is provided before querying the database**
+        if (!email) {
+            return res.status(400).json({ error: 'Email must be provided' });
+        }
 
-        //create token
-        const token = createToken(history._id)
+        const eventHistory = await History.searchVolunteerHistory(email);
 
-        res.status(200).json({eventHistory})
+        // **Create a token (optional, not used directly in frontend)**
+        const token = createToken(email); // Using email as payload for the token
+
+        res.status(200).json({ eventsAttended: eventHistory, token });
     } catch (error) {
-        res.status(400).json({error: error.message})
+        res.status(400).json({ error: error.message });
     }
+};
 
-}
-
-module.exports = {searchVolunteerHistory}
+module.exports = { searchVolunteerHistory };

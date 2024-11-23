@@ -22,7 +22,6 @@ histSchema.statics.searchVolunteerHistory = async function (email) {
         throw new Error('Email must be provided');
     }
 
-    // Find the document by email
     const volunteerHistory = await this.findOne({ email });
     if (!volunteerHistory) {
         throw new Error('No history found for this email');
