@@ -8,6 +8,7 @@ import Event from "./pages/Event"
 import History from "./pages/volunteer/History"
 import Navbar from "./components/Navbar"
 import AdminLogin from "./pages/admin/AdminLogin"
+import ServerTest from "./pages/ServerTest";
 
 function App() {
   return (
@@ -22,6 +23,8 @@ function App() {
         <Route path="/history" element={<History />}/>
 
         <Route path="/admin/login" element={<AdminLogin />}/>
+
+        <Route path="/test" element={<ServerTest />}/>
       </Routes>
     </>
   )
