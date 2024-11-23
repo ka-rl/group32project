@@ -29,10 +29,6 @@ const userSchema = new Schema ({
         type: String,
         required: false
     },
-    eventHistory: {
-        type: Array,
-        required: false
-    },
     isAdmin: {
         type: Boolean,
         required: false
@@ -83,23 +79,5 @@ userSchema.statics.login = async function(email, password) {
 
 }
 
-userSchema.statics.searchVolunteerHistory = async function(email) {
-    
-    if (!email)
-    {
-        throw Error('All fields must be filled')
-    }
-
-    const user = await this.findOne({ email })
-    if (!user) {
-        throw Error('Invalid email')
-    }
-
-    const match = (email == user.email)
-    return user
-
-    //This is incomplete
-
-}
 
 module.exports = mongoose.model('User', userSchema)
