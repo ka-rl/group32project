@@ -17,22 +17,25 @@ import {
   Th,
   Td,
   useToast,
+  Spinner,
 } from '@chakra-ui/react';
 import AdminSidebar from '../../components/AdminSidebar';
+import { useEventCreation } from '../../hooks/useEventCreation'; // Import the hook
 
 function ManageEvent() {
-  const [events, setEvents] = useState([]);
   const [newEvent, setNewEvent] = useState({
     name: '',
     date: '',
     location: '',
-    skills: '',
+    description: '',
   });
+  const { createEvent, error, isLoading } = useEventCreation(); // Using the event creation hook
+  const [events, setEvents] = useState([]); // Events list state
   const toast = useToast();
 
   // Add new event
-  const addEvent = () => {
-    if (!newEvent.name || !newEvent.date || !newEvent.location || !newEvent.skills) {
+  const addEvent = async () => {
+    if (!newEvent.name || !newEvent.date || !newEvent.location || !newEvent.description) {
       toast({
         title: 'Error',
         description: 'All fields are required!',
@@ -43,15 +46,32 @@ function ManageEvent() {
       return;
     }
 
-    setEvents([...events, { ...newEvent, id: Date.now() }]);
-    setNewEvent({ name: '', date: '', location: '', skills: '' }); // Clear form
-    toast({
-      title: 'Success',
-      description: 'Event added successfully!',
-      status: 'success',
-      duration: 3000,
-      isClosable: true,
-    });
+    try {
+      // Call the createEvent function from the hook
+      const createdEvent = await createEvent(newEvent.name, newEvent.description, newEvent.location, newEvent.date);
+
+      if (createdEvent) {
+        // If the event is successfully created, update the events list
+        setEvents((prevEvents) => [...prevEvents, createdEvent]);
+        setNewEvent({ name: '', date: '', location: '', description: '' }); // Clear form
+
+        toast({
+          title: 'Event Created',
+          description: 'The event has been created successfully!',
+          status: 'success',
+          duration: 3000,
+          isClosable: true,
+        });
+      }
+    } catch (error) {
+      toast({
+        title: 'Error',
+        description: 'Something went wrong while creating the event.',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
+    }
   };
 
   // Remove event
@@ -59,17 +79,6 @@ function ManageEvent() {
     setEvents(events.filter((event) => event.id !== id));
     toast({
       title: 'Event removed',
-      status: 'info',
-      duration: 3000,
-      isClosable: true,
-    });
-  };
-
-  // Update event (placeholder for future functionality)
-  const updateEvent = (id) => {
-    toast({
-      title: 'Edit Event',
-      description: `Edit functionality can be added here for Event ID: ${id}`,
       status: 'info',
       duration: 3000,
       isClosable: true,
@@ -119,15 +128,16 @@ function ManageEvent() {
                     }
                   />
                   <Textarea
-                    placeholder="Skills Required/Preferred (e.g., Communication, Time Management)"
-                    value={newEvent.skills}
+                    placeholder="Description"
+                    value={newEvent.description}
                     onChange={(e) =>
-                      setNewEvent((prev) => ({ ...prev, skills: e.target.value }))
+                      setNewEvent((prev) => ({ ...prev, description: e.target.value }))
                     }
                   />
-                  <Button colorScheme="teal" onClick={addEvent}>
+                  <Button colorScheme="teal" onClick={addEvent} isLoading={isLoading}>
                     Add Event
                   </Button>
+                  {error && <Text color="red.500">{error}</Text>}
                 </VStack>
 
                 {/* Events Table */}
@@ -141,7 +151,7 @@ function ManageEvent() {
                         <Th>Event Name</Th>
                         <Th>Date</Th>
                         <Th>Location</Th>
-                        <Th>Skills Required</Th>
+                        <Th>Description</Th>
                         <Th>Actions</Th>
                       </Tr>
                     </Thead>
@@ -151,13 +161,13 @@ function ManageEvent() {
                           <Td>{event.name}</Td>
                           <Td>{event.date}</Td>
                           <Td>{event.location}</Td>
-                          <Td>{event.skills}</Td>
+                          <Td>{event.description}</Td>
                           <Td>
                             <HStack spacing="2">
                               <Button
                                 colorScheme="yellow"
                                 size="sm"
-                                onClick={() => updateEvent(event.id)}
+                                // Add edit functionality here
                               >
                                 Edit
                               </Button>
