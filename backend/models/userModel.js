@@ -17,7 +17,6 @@ const userSchema = new Schema ({
         type: String,
         required: true
     },
-    
     preference: {
         type: String,
         required: true
@@ -79,5 +78,6 @@ userSchema.statics.login = async function(email, password) {
     return user
 
 }
+
 
 module.exports = mongoose.model('User', userSchema)
